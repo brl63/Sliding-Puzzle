@@ -20,7 +20,16 @@ namespace Sliding_Puzzle
         private Button[,] _btnGrid;
 
         int Timer = 0;
-        int Moves = 0;
+
+        private void UpdateHighScore()
+        {
+            int savedHighScore = Properties.Settings.Default.HighScore;
+
+            if (savedHighScore == 0)
+                lblHighScore.Text = "No High Score Yet";
+            else
+                lblHighScore.Text = savedHighScore.ToString();
+        }
         public frm4SlidingPuzzle()
         {
             InitializeComponent();
@@ -64,6 +73,16 @@ namespace Sliding_Puzzle
                                          {btn8,btn9,btn10,btn11},
                                          {btn12,btn13,btn14,btn15},
                                         };
+            int High = Properties.Settings.Default.HighScore;
+            if (High == 0)
+            {
+                lblHighScore.Text = "No HighScore Yet";
+            }
+            else
+            {
+            lblHighScore.Text = High.ToString();
+                
+            }
             _game.Shuffle();
             UpdateBoard();
         }
@@ -73,7 +92,18 @@ namespace Sliding_Puzzle
             if (_game.IsSolved())
             {
                 timer1.Stop();
-                MessageBox.Show($"Congrat u won", $"Congrats u solved the puzzle\n Number of Moves : {lblMove.Text} \n Your Time : {lblTime.Text} Seconds", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                int currentScore = 100000 - (_game.Moves * 200) - (Timer * 100);
+                if(currentScore  < 0)currentScore = 0;
+                int savedHighScore = Properties.Settings.Default.HighScore;
+                if (currentScore > savedHighScore)
+                {
+                    Properties.Settings.Default.HighScore = currentScore;
+                    Properties.Settings.Default.Save();
+                    lblHighScore.Text = currentScore.ToString();
+                    MessageBox.Show($"New HighScore", $"Congrats u solved the puzzle and Got A New HighScore\n your score {lblHighScore.Text} \n Your Time {lblTime.Text} Seconds \n Your Number Of Moves : {lblMove.Text}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
             }
         }
         private void ClickButton(object sender, EventArgs e)
@@ -104,5 +134,7 @@ namespace Sliding_Puzzle
             timer1.Start();
 
         }
+
+      
     }
 }

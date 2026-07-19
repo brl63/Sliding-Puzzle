@@ -51,6 +51,8 @@
             this.lblMoves = new System.Windows.Forms.Label();
             this.lblMove = new System.Windows.Forms.Label();
             this.btnRestart = new System.Windows.Forms.Button();
+            this.lblHigh = new System.Windows.Forms.Label();
+            this.lblHighScore = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn1
@@ -281,11 +283,32 @@
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
+            // lblHigh
+            // 
+            this.lblHigh.AutoSize = true;
+            this.lblHigh.Location = new System.Drawing.Point(1110, 243);
+            this.lblHigh.Name = "lblHigh";
+            this.lblHigh.Size = new System.Drawing.Size(84, 20);
+            this.lblHigh.TabIndex = 21;
+            this.lblHigh.Text = "HighScore";
+
+            // 
+            // lblHighScore
+            // 
+            this.lblHighScore.AutoSize = true;
+            this.lblHighScore.Location = new System.Drawing.Point(1110, 281);
+            this.lblHighScore.Name = "lblHighScore";
+            this.lblHighScore.Size = new System.Drawing.Size(84, 20);
+            this.lblHighScore.TabIndex = 22;
+            this.lblHighScore.Text = "HighScore";
+            // 
             // frm4SlidingPuzzle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 722);
+            this.Controls.Add(this.lblHighScore);
+            this.Controls.Add(this.lblHigh);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.lblMove);
             this.Controls.Add(this.lblMoves);
@@ -339,6 +362,8 @@
         private System.Windows.Forms.Label lblMoves;
         private System.Windows.Forms.Label lblMove;
         private System.Windows.Forms.Button btnRestart;
+        private System.Windows.Forms.Label lblHigh;
+        private System.Windows.Forms.Label lblHighScore;
     }
 }
 
