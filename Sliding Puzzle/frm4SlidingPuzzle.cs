@@ -12,7 +12,7 @@ using clsBus;
 
 namespace Sliding_Puzzle
 {
-
+    
     public partial class frm4SlidingPuzzle : Form
     {
         private clsBus.Game _game = new clsBus.Game();
@@ -59,6 +59,18 @@ namespace Sliding_Puzzle
                         btn.Text = numberInBusiness.ToString();
                         btn.Visible = true;
                         btn.Enabled = true;
+
+                        // Colors
+                        if (_game.IsInCorrectPosition(numberInBusiness, i, j))
+                        {
+                            btn.BackColor = Color.LightGreen; // في مكانه الصح
+                            btn.ForeColor = Color.DarkGreen;
+                        }
+                        else
+                        {
+                            btn.BackColor = Color.WhiteSmoke;  // لسه مش في مكانه
+                            btn.ForeColor = Color.Black;
+                        }
                     }
                 }
             }
@@ -101,8 +113,27 @@ namespace Sliding_Puzzle
                     Properties.Settings.Default.HighScore = currentScore;
                     Properties.Settings.Default.Save();
                     lblHighScore.Text = currentScore.ToString();
-                    MessageBox.Show($"New HighScore", $"Congrats u solved the puzzle and Got A New HighScore\n your score {lblHighScore.Text} \n Your Time {lblTime.Text} Seconds \n Your Number Of Moves : {lblMove.Text}", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    MessageBox.Show(
+                        $"New High Score 🎉\n\n" +
+                        $"Your New HighScore: {currentScore}\n" +
+                        $"Your Time: {lblTime.Text} Seconds\n" +
+                        $"Number Of Moves: {lblMove.Text}",
+                        "Victory!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
+                else 
+                {
+                    MessageBox.Show(
+                        $"Congrats! You solved the puzzle! 🎉\n\n" +
+                        $"Your Score: {currentScore}\n" +
+                        $"Your Time: {lblTime.Text} Seconds\n" +
+                        $"Number Of Moves: {lblMove.Text}",
+                        "Victory!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
             }
         }
@@ -131,6 +162,7 @@ namespace Sliding_Puzzle
             _game.Reset();
             Timer = 0;
             lblMove.Text = _game.Moves.ToString();
+            UpdateBoard();
             timer1.Start();
 
         }
