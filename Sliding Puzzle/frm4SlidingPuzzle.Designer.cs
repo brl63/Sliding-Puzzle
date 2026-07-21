@@ -53,6 +53,9 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.lblHigh = new System.Windows.Forms.Label();
             this.lblHighScore = new System.Windows.Forms.Label();
+            this.pnlGame = new System.Windows.Forms.Panel();
+            this.chkFlashMode = new System.Windows.Forms.CheckBox();
+            this.pnlGame.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn1
@@ -126,7 +129,7 @@
             this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn5.Font = new System.Drawing.Font("Segoe UI Emoji", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn5.ForeColor = System.Drawing.Color.White;
-            this.btn5.Location = new System.Drawing.Point(36, 208);
+            this.btn5.Location = new System.Drawing.Point(23, 283);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(220, 125);
             this.btn5.TabIndex = 4;
@@ -398,12 +401,32 @@
             this.lblHighScore.TabIndex = 22;
             this.lblHighScore.Text = "—";
             // 
+            // pnlGame
+            // 
+            this.pnlGame.Controls.Add(this.btn5);
+            this.pnlGame.Location = new System.Drawing.Point(13, -75);
+            this.pnlGame.Name = "pnlGame";
+            this.pnlGame.Size = new System.Drawing.Size(1049, 795);
+            this.pnlGame.TabIndex = 23;
+            // 
+            // chkFlashMode
+            // 
+            this.chkFlashMode.AutoSize = true;
+            this.chkFlashMode.Location = new System.Drawing.Point(1100, 131);
+            this.chkFlashMode.Name = "chkFlashMode";
+            this.chkFlashMode.Size = new System.Drawing.Size(157, 24);
+            this.chkFlashMode.TabIndex = 25;
+            this.chkFlashMode.Text = "Flash Light Mode";
+            this.chkFlashMode.UseVisualStyleBackColor = true;
+            this.chkFlashMode.CheckedChanged += new System.EventHandler(this.chkFlashMode_CheckedChanged);
+            // 
             // frm4SlidingPuzzle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1326, 722);
+            this.Controls.Add(this.chkFlashMode);
             this.Controls.Add(this.lblHighScore);
             this.Controls.Add(this.lblHigh);
             this.Controls.Add(this.btnRestart);
@@ -422,16 +445,17 @@
             this.Controls.Add(this.btn7);
             this.Controls.Add(this.btn6);
             this.Controls.Add(this.btn16);
-            this.Controls.Add(this.btn5);
             this.Controls.Add(this.btn4);
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
+            this.Controls.Add(this.pnlGame);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "frm4SlidingPuzzle";
             this.Text = "4x4 Sliding Puzzle 🎮";
             this.Load += new System.EventHandler(this.frm4SlidingPuzzle_Load);
+            this.pnlGame.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -463,6 +487,8 @@
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Label lblHigh;
         private System.Windows.Forms.Label lblHighScore;
+        private System.Windows.Forms.Panel pnlGame;
+        private System.Windows.Forms.CheckBox chkFlashMode;
     }
 }
 

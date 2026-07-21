@@ -15,6 +15,8 @@ namespace Sliding_Puzzle
     
     public partial class frm4SlidingPuzzle : Form
     {
+        private bool _isFlashlightMode = false;
+
         private clsBus.Game _game = new clsBus.Game();
 
         private Button[,] _btnGrid;
@@ -35,9 +37,8 @@ namespace Sliding_Puzzle
             InitializeComponent();
         }
 
-       private void UpdateBoard()
+        private void UpdateBoard()
         {
-
             int[,] values = _game.GetValues();
 
             for (int i = 0; i < values.GetLength(0); i++)
@@ -60,16 +61,24 @@ namespace Sliding_Puzzle
                         btn.Visible = true;
                         btn.Enabled = true;
 
-                        // Colors
-                        if (_game.IsInCorrectPosition(numberInBusiness, i, j))
+                        if (_isFlashlightMode)
                         {
-                            btn.BackColor = Color.LightGreen; // في مكانه الصح
-                            btn.ForeColor = Color.DarkGreen;
+                            btn.BackColor = Color.Black;
+                            btn.ForeColor = Color.Black;
                         }
                         else
                         {
-                            btn.BackColor = Color.WhiteSmoke;  // لسه مش في مكانه
-                            btn.ForeColor = Color.Black;
+                            //Coloring the board if its in the right pos
+                            if (_game.IsInCorrectPosition(numberInBusiness, i, j))
+                            {
+                                btn.BackColor = Color.LightGreen; 
+                                btn.ForeColor = Color.DarkGreen;
+                            }
+                            else
+                            {
+                                btn.BackColor = Color.WhiteSmoke;  
+                                btn.ForeColor = Color.Black;
+                            }
                         }
                     }
                 }
@@ -77,7 +86,6 @@ namespace Sliding_Puzzle
         }
 
 
-        
         private void frm4SlidingPuzzle_Load(object sender, EventArgs e)
         {
             _btnGrid = new Button[4, 4] {{btn1,btn2,btn3,btn4},
@@ -97,6 +105,15 @@ namespace Sliding_Puzzle
             }
             _game.Shuffle();
             UpdateBoard();
+
+            foreach (Button btn in _btnGrid)
+            {
+                btn.FlatStyle = FlatStyle.Flat;            
+                btn.FlatAppearance.BorderSize = 0;          
+
+                btn.MouseEnter += Btn_MouseEnter;
+                btn.MouseLeave += Btn_MouseLeave;
+            }
         }
 
         private void DidHeWin() 
@@ -167,6 +184,45 @@ namespace Sliding_Puzzle
 
         }
 
-      
+        private void Btn_MouseEnter(object sender, EventArgs e)
+        {
+            if (_isFlashlightMode)
+            {
+                Button btn = (Button)sender;
+                if ((int)btn.Tag != 0)
+                {
+                    btn.ForeColor = Color.White;
+                    btn.BackColor = Color.DarkSlateGray; // لون الكشاف
+                }
+            }
+        }
+
+        private void Btn_MouseLeave(object sender, EventArgs e)
+        {
+            if (_isFlashlightMode)
+            {
+                Button btn = (Button)sender;
+                // اطفيه تاني لما الماوس يبعد
+                if ((int)btn.Tag != 0)
+                {
+                    btn.ForeColor = Color.Black; // نفس لون الخلفية عشان يختفي
+                    btn.BackColor = Color.Black;
+                }
+            }
+        }
+
+        private void chkFlashMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFlashMode.Checked) 
+            {
+               _isFlashlightMode = true;
+                UpdateBoard();
+            }
+            else
+            {
+                _isFlashlightMode =false;
+                UpdateBoard();
+            }
+        }
     }
 }
