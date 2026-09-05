@@ -11,3 +11,9 @@ if u did clone please make sure that is two projects not one in the solution if 
 ## what is that
 its a simple sliding puzzle but with a mode in my imagination u will find it great ( i hope)
 
+## Compatibility 
+only runs on windows
+
+## Technologies
+c# (.net) ,windows forms
+
